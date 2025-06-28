@@ -45,5 +45,7 @@ export const exportTransactions = async (req: Request, res: Response) => {
   const transactions = await Transaction.find({ user: userId }).lean();
   const filePath = await exportCSV(transactions, columns);
 
-  res.download(filePath);
+  // ✅ Triggers file download in browser
+  res.download(filePath, 'transactions.csv');
 };
+
